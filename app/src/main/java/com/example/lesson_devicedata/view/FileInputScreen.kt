@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import java.io.*
 
 @Composable
-fun FileInput(context: Context) {
+fun FileInputScreen(context: Context) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceEvenly,
