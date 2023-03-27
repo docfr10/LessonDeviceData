@@ -1,39 +1,52 @@
-package com.example.lesson_devicedata
+package com.example.lesson_devicedata.view
 
-import android.content.Intent
-import android.net.Uri
-import android.os.Environment
-import android.provider.MediaStore
+import android.graphics.Bitmap
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import java.io.File
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.unit.dp
 
 @Composable
-fun FileInputScreen(takeAPictureLauncher: ActivityResultLauncher<Intent>) {
-    var photo: Uri? = null
-
+fun CameraScreen() {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Button(onClick = {
-            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            val file = File(
-                Environment.getExternalStorageDirectory(),
-                "test.jpg"
+        val bitmap = remember { mutableStateOf<Bitmap?>(null) }
+        val launcher: ActivityResultLauncher<Void> = rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.TakePicturePreview()
+        ) { result ->
+            result?.let {
+                bitmap.value = it
+            }
+        }
+
+        bitmap.value?.let {
+            Image(
+                bitmap = it.asImageBitmap(),
+                contentDescription = null,
+                modifier = Modifier.size(400.dp)
             )
-            photo = Uri.fromFile(file)
-            takeAPictureLauncher.launch(takePictureIntent)
+        }
+
+        Button(onClick = {
+            launcher.launch(null)
         }) {
-            Text(text = "Take a photo")
+            Text(text = "Take picture")
         }
     }
 }

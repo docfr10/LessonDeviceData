@@ -2,39 +2,24 @@ package com.example.lesson_devicedata
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.location.LocationProvider
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ActivityCompat
 import com.example.lesson_devicedata.ui.theme.LessonDeviceDataTheme
+import com.example.lesson_devicedata.view.CameraScreen
 import com.example.lesson_devicedata.view.LocationScreen
 import com.example.lesson_devicedata.view.QRCodeScreen
 import java.util.*
 
 
 class MainActivity : ComponentActivity() {
-    // Camera
-    private var imageView: ImageView? = null
-    private val takeAPictureLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val thumbnailBitmap = result.data?.extras?.get("data") as Bitmap
-                imageView?.setImageBitmap(thumbnailBitmap)
-            } else {
-                Toast.makeText(this, "Failed to take picture", Toast.LENGTH_SHORT).show()
-            }
-        }
-
     // Location
     private lateinit var locationManager: LocationManager
     private val locationListener: LocationListener = object : LocationListener {
@@ -89,15 +74,15 @@ class MainActivity : ComponentActivity() {
             LessonDeviceDataTheme {
                 val context = LocalContext.current
 
-                //CameraScreen(takeAPictureLauncher = takeAPictureLauncher)
-                //FileInputScreen(context = context)
-                //LocationScreen(
-                //    locationGPS = locationGPS,
-                //    locationNet = locationNet,
-                //    enabledGPS = enabledGPS,
-                //    enabledNet = enabledNet
-                //)
-                //QRCodeScreen()
+//                CameraScreen()
+//                FileInputScreen(context = context)
+//                LocationScreen(
+//                    locationGPS = locationGPS,
+//                    locationNet = locationNet,
+//                    enabledGPS = enabledGPS,
+//                    enabledNet = enabledNet
+//                )
+//                QRCodeScreen()
             }
         }
     }
