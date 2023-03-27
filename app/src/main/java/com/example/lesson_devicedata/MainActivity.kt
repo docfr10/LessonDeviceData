@@ -16,7 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ActivityCompat
 import com.example.lesson_devicedata.ui.theme.LessonDeviceDataTheme
-import com.example.lesson_devicedata.view.LocationScreen
+import com.example.lesson_devicedata.view.QRCodeScreen
 import java.util.*
 
 
@@ -75,12 +75,13 @@ class MainActivity : ComponentActivity() {
 
                 //CameraScreen(takeAPictureLauncher = takeAPictureLauncher)
                 //FileInputScreen(context = context)
-                LocationScreen(
-                    locationGPS = locationGPS,
-                    locationNet = locationNet,
-                    enabledGPS = enabledGPS,
-                    enabledNet = enabledNet
-                )
+                //LocationScreen(
+                //    locationGPS = locationGPS,
+                //    locationNet = locationNet,
+                //    enabledGPS = enabledGPS,
+                //    enabledNet = enabledNet
+                //)
+                QRCodeScreen()
             }
         }
     }
